@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Text Box Form</title>
+  
+  <style>
+    body {
+      margin: 0;
+    }
+    #information {
+      display: none;
+      transition: opacity 0.3s ease;
+    }
+    #informationVL {
+      display: none;
+      transition: opacity 0.3s ease;
+    }
+    #informationAP {
+      display: none;
+      transition: opacity 0.3s ease;
+    }
+    #dropdownButton.open #arrowSymbol {
+      transform: rotate(180deg); /* Rotate the arrow 180 degrees when the information is visible */
+    }
+    .slide{
+        display: none;
+    }
+    .info{
+        display: none;
+    }
+    .box-container {
+      display: flex;
+      margin-bottom: 5px;
+    }
+    
+
+    .box {
+      flex: 1;
+      width: 50px;
+      height: 50px;
+      margin: 5px;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    .text-box {
+      font-size: 16px;
+      padding: 10px;
+      width: 200px;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+    }
+
+    .plus-button {
+      font-size: 20px;
+      cursor: pointer;
+      padding: 5px;
+      border: none;
+      background-color: lightblue;
+      border-radius: 50%;
+    }
+        .slide-container {
+            display: inline-block;
+            position: relative;
+            width: 60px;
+            height: 34px;
+            margin-left: 10px; /* Adjust the margin as needed */
+    
+        }
+
+        .slide-input {
+            display: none;
+        }
+
+        .slide-label {
+            cursor: pointer;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            border-radius: 34px;
+            transition: background-color 0.3s;
+        }
+
+        .slide-label:before {
+            content: "";
+            position: absolute;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background-color: #fff;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            top:4px;
+            transition: left 0.3s; /* Updated transition property */
+            left: 4px; /* Adjusted for horizontal centering */
+            transform: translateX(0);
+        }
+
+        .slide-input:checked + .slide-label {
+            background-color: #4CAF50; /* Green background when the button is ON */
+        }
+
+        .slide-input:checked + .slide-label:before {
+            left: 30px; /* Adjusted for the horizontal sliding distance */
+        }
+        .slide-bar {
+            display: flex;
+            align-items: center;
+        }
+      .VL
+      {
+        padding-top: 20px;
+      }
+      
+  </style>
+</head>
+<body>
+<div class="heading">
+            <div class="BL">
+        <p>
+            <button id="dropdownButton">
+                <span id="arrowSymbol"> ▼</span>
+            </button>
+            Basic Logistics
+        </p>
+  
+    <div id="information" class="info">
+        <form action="#" method="post">
+            <div class="space1">
+                <div class="box-container">
+                    <div class="box">
+                        <label for="textbox1">Style of cause</label><br>
+                        <input type="text" id="textbox1" class="text-box" name="textbox1">
+                    </div>
+
+                    <div class="box">
+                        <label for="textbox2">Court File #</label><br>
+                        <input type="text" id="textbox2" class="text-box" name="textbox2">
+                    </div>
+
+                    <div class="box">
+                        <label for="textbox3">Booking Dates</label><br>
+                        <input type="text" id="textbox3" class="text-box" name="textbox3">
+                    </div>
+                </div>
+
+                <div class="box-container">
+                    <div class="box">
+                        <label for="textbox4">Start time</label><br>
+                        <input type="text" id="textbox4" class="text-box" name="textbox4">
+                    </div>
+
+                    <div class="box">
+                        <label for="textbox5">End Time</label><br>
+                        <input type="text" id="textbox5" class="text-box" name="textbox5">
+                    </div>
+
+                    <div class="box">
+                        <label for="textbox6">Time Zone</label><br>
+                        <input type="text" id="textbox6" class="text-box" name="textbox6">
+                    </div>
+                </div>
+            </div>
+
+            <div class="space2">
+                <div class="box-container">
+                    <div class="box">
+                        <label for="textbox7">Arbitrator(s)</label><br>
+                        <input type="text" id="textbox7" class="text-box" name="textbox7" placeholder="Chair’s name">
+                    </div>
+
+                    <div class="box">
+                        
+                        <input type="text" id="textbox8" class="text-box" name="textbox8" placeholder="Email">
+                    </div>
+                </div>
+                <div class="dynamicInfo" id="dynamicTextBoxContainer">
+                  <button type="button" class="plus-button" onclick="addTextboxes()">+</button>
+                </div>
+                <p>
+                    <div class="slide-bar">Tribunal secretary? 
+                      <label class="slide-container">
+                        <input type="checkbox" class="slide-input" id="useInformationCheckbox">
+                        <span class="slide-label"></span>
+                      </label>
+                    </div>
+                  </p>
+                  <div id="slide" class="slide">
+                <div class="box-container">
+                    <div class="box">
+                        <label for="textbox9">Witness(es)</label><br>
+                        <input type="text" id="textbox9" class="text-box" name="textbox9" placeholder="Witness’ name">
+                    </div>
+
+                    <div class="box">
+                        <label for="textbox2"></label><br>
+                        <input type="text" id="textbox10" class="text-box" name="textbox10" placeholder="Email">
+                    </div>
+                </div>
+      
+                <div class="dynamicInfo" id="dynamicTextBoxContainer1">
+                    <button type="button" class="plus-button" onclick="addTextboxes1()">+</button>
+                </div>
+                </div>
+            </form>
+    </div>
+            </div>
+
+    <div class="VL">
+        <p>
+            <button id="dropdownButtonVL">
+                <span id="arrowSymbolVL"> ▼</span>
+            </button>
+            Virtual Logistics
+        <br>
+        </p>
+        <div id="arrowVL" class="info">
+        <p>
+            <div class="slide-bar">Do you require a VCM (virtual case manager)?
+              <label class="slide-container">
+                <input type="checkbox" class="slide-input" id="useInformationCheckbox2">
+                <span class="slide-label"></span>
+              </label>
+            </div>
+          </p>
+          <div id="slide2" class="slide">
+            <div class="box-container">
+                <div class="box">
+                    <label for="textbox11">Is there a particular VCM you want to work with?</label><br>
+                    <input type="text" id="textbox11" class="text-box" name="textbox11">
+                </div>
+            </div>
+            <div class="box-container">
+                <div class="box">
+                    <label for="textbox12">Select a virtual platform</label><br>
+                    <input type="text" id="textbox12" class="text-box" name="textbox12">
+                </div>
+
+                <div class="box">
+                    <label for="textbox13">Number of virtual breakout rooms</label><br>
+                    <input type="text" id="textbox13" class="text-box" name="textbox13">
+                </div>
+            </div>
+          </div>
+          
+        <p>
+            <div class="slide-bar">Do you need us to provide Document Managing Services? 
+              <label class="slide-container">
+                <input type="checkbox" class="slide-input" id="useInformationCheckbox3">
+                <span class="slide-label"></span>
+              </label>
+            </div>
+          </p>
+          <div id="slide3" class="slide">
+            <div class="box-container">
+                <div class="box">
+                    <label for="textbox14">Do you have any  special accommodations for your
+                        booking that our I.T. team can look into prior to the
+                        start date?</label><br>
+                    <input type="text" id="textbox14" class="text-box" name="textbox14">
+                </div>
+                <div class="box">
+                <p>
+                    <div class="slide-bar">Would you like the your matter to be recorded?
+                      <label class="slide-container">
+                        <input type="checkbox" class="slide-input" id="useInformationCheckbox4">
+                        <span class="slide-label"></span>
+                      </label>
+                    </div>
+                  </p>
+                </div>
+            </div>
+          </div>
+          </div>
+    </div>
+</div>
+
+    </div>
+    
+<script>
+    // BL (Booking Party Information)
+  var dropdownButton = document.getElementById('dropdownButton');
+  var informationDiv = document.getElementById('information');
+  var arrowSymbol = document.getElementById('arrowSymbol');
+  var v=1;
+
+// Example usage:
+let result1 = initializeOnce(); // Initialization occurs here
+console.log(result1); // Output: "Initialized Value"
+
+// Subsequent calls do not re-initialize
+let result2 = initializeOnce();
+console.log(result2); //
+
+  dropdownButton.addEventListener('click', function (event) {
+      event.preventDefault(); // Prevent the default form submission behavior
+
+      if (informationDiv.style.display === 'none' || informationDiv.style.display === '') {
+          informationDiv.style.display = 'block';
+          dropdownButton.classList.add('open');
+          arrowSymbol.innerHTML = ' ▲';
+      } else {
+          informationDiv.style.display = 'none';
+          dropdownButton.classList.remove('open');
+          arrowSymbol.innerHTML = ' ▼';
+      }
+  });
+  
+  document.getElementById('useInformationCheckbox').addEventListener('change', function () {
+    const slideDiv = document.getElementById('slide');
+
+    if (this.checked) {
+      // If checkbox is checked, show information
+      slideDiv.style.display = 'block';
+    } else {
+      // If checkbox is unchecked, hide information
+      slideDiv.style.display = 'none';
+    }
+  });
+  function addTextboxes() {
+      const container = document.getElementById('dynamicTextBoxContainer');
+      const newBoxContainer = createBoxContainer();
+      container.appendChild(newBoxContainer);
+  }
+  function createBoxContainer() {
+      const boxContainer = document.createElement('div');
+      boxContainer.className = 'box-container';
+
+      const newBox1 = createBox('textboxBP'+v + (boxContainer.children.length * 2 + 1));
+      const newBox2 = createBox('textboxBL' +v+ (boxContainer.children.length * 2 + 2));
+
+      boxContainer.appendChild(newBox1);
+      boxContainer.appendChild(newBox2);
+
+      return boxContainer;
+      v=v+1;
+  }
+
+  function createBox(id) {
+      const box = document.createElement('div');
+      box.className = 'box';
+
+      const label = document.createElement('label');
+      label.setAttribute('for', id);
+      
+
+      const input = document.createElement('input');
+      input.type = 'text';
+      input.id = id;
+      input.name = id;
+      input.className = 'text-box';
+      
+
+      box.appendChild(label);
+      box.appendChild(document.createElement('br'));
+      box.appendChild(input);
+
+      return box;
+  }
+  //2222222222222
+  function addTextboxes1() {
+      const container = document.getElementById('dynamicTextBoxContainer1');
+      const newBoxContainer = createBoxContainer1();
+      container.appendChild(newBoxContainer);
+  }
+
+  function createBoxContainer1() {
+      const boxContainer = document.createElement('div');
+      boxContainer.className = 'box-container';
+
+      const newBox1 = createBox1('textboxB' + (boxContainer.children.length * 2 + 1));
+      const newBox2 = createBox1('textboxB1' + (boxContainer.children.length * 2 + 2));
+
+      boxContainer.appendChild(newBox1);
+      boxContainer.appendChild(newBox2);
+
+      return boxContainer;
+  }
+
+  function createBox1(id) {
+      const box = document.createElement('div');
+      box.className = 'box';
+
+      const label = document.createElement('label');
+      label.setAttribute('for', id);
+      
+      const input = document.createElement('input');
+      input.type = 'text';
+      input.id = id;
+      input.name = id;
+      input.className = 'text-box';
+      box.appendChild(label);
+      box.appendChild(document.createElement('br'));
+      box.appendChild(input);
+
+      return box;
+  }
+
+  // VL (Opposing Party Information)
+
+  document.getElementById('useInformationCheckbox2').addEventListener('change', function () {
+    const slideDiv = document.getElementById('slide2');
+
+    if (this.checked) {
+      // If checkbox is checked, show information
+      slideDiv.style.display = 'block';
+    } else {
+      // If checkbox is unchecked, hide information
+      slideDiv.style.display = 'none';
+    }
+  });
+  document.getElementById('useInformationCheckbox3').addEventListener('change', function () {
+    const slideDiv = document.getElementById('slide3');
+
+    if (this.checked) {
+      // If checkbox is checked, show information
+      slideDiv.style.display = 'block';
+    } else {
+      // If checkbox is unchecked, hide information
+      slideDiv.style.display = 'none';
+    }
+  });
+  var dropdownButtonVL = document.getElementById('dropdownButtonVL');
+  var informationDivVL = document.getElementById('arrowVL');
+  var arrowSymbolVL = document.getElementById('arrowSymbolVL');
+
+  dropdownButtonVL.addEventListener('click', function (event) {
+      if (informationDivVL.style.display === 'none' || informationDivVL.style.display === '') {
+          informationDivVL.style.display = 'block';
+          dropdownButtonVL.classList.add('open');
+          arrowSymbolVL.innerHTML = ' ▲';
+      } else {
+          informationDivVL.style.display = 'none';
+          dropdownButtonVL.classList.remove('open');
+          arrowSymbolVL.innerHTML = ' ▼';
+      }
+  });
+
+
+</script>
+</body>
+</html>

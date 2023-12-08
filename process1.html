@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Text Box Form</title>
+  <style>
+    body {
+      margin: 0;
+    }
+    #information {
+      display: none;
+      transition: opacity 0.3s ease;
+    }
+    #informationOPI {
+      display: none;
+      transition: opacity 0.3s ease;
+    }
+    #informationAP {
+      display: none;
+      transition: opacity 0.3s ease;
+    }
+    #dropdownButton.open #arrowSymbol {
+      transform: rotate(180deg); /* Rotate the arrow 180 degrees when the information is visible */
+    }
+    .space2{
+        padding-left: 20%;
+      padding-right: 20%;
+    }
+
+    .box-container {
+      display: flex;
+      margin-bottom: 5px;
+    }
+    .box-container1 {
+      display: flex;
+      margin-bottom: 5px;
+    }
+
+    .box {
+      flex: 1;
+      width: 50px;
+      height: 50px;
+      margin: 5px;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    .text-box {
+      font-size: 16px;
+      padding: 10px;
+      width: 200px;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+    }
+
+    .plus-button {
+      font-size: 20px;
+      cursor: pointer;
+      border: none;
+      background-color: lightblue;
+      border-radius: 50%;
+    }
+        .slide-container {
+            display: inline-block;
+            position: relative;
+            width: 60px;
+            height: 34px;
+            margin-left: 10px; /* Adjust the margin as needed */
+    
+        }
+
+        .slide-input {
+            display: none;
+        }
+
+        .slide-label {
+            cursor: pointer;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            border-radius: 34px;
+            transition: background-color 0.3s;
+        }
+
+        .slide-label:before {
+            content: "";
+            position: absolute;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background-color: #fff;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            top:4px;
+            transition: left 0.3s; /* Updated transition property */
+            left: 4px; /* Adjusted for horizontal centering */
+            transform: translateX(0);
+        }
+
+        .slide-input:checked + .slide-label {
+            background-color: #4CAF50; 
+        }
+        .slide-input:checked + .slide-label:before {
+            left: 30px; 
+        }
+        .slide-bar {
+            display: flex;
+            align-items: center;
+        }
+      .OPI
+      {
+        padding-top: 20px;
+      }
+      .AP{
+        padding-top: 20px;
+      }
+      #slide{
+        display: none;
+      }
+  </style>
+</head>
+<body>
+<div class="heading">
+            <div class="BPI">
+        <p>
+            <button id="dropdownButton">
+                <span id="arrowSymbol"> ▼</span>
+            </button>
+            Booking Party Information (Enter as much as possible)
+        </p>
+        <div id="slide">
+        <p>
+            <div class="slide-bar">Use information for account
+                <label class="slide-container">
+                    <input type="checkbox" class="slide-input" id="useInformationCheckbox">
+                    <span class="slide-label"></span>
+                </label>
+            </div>
+        </p>
+    </div>
+    <div id="information">
+        <form action="#" method="post">
+            <div class="space1">
+                <div class="box-container">
+                    <div class="box">
+                        <label for="textbox1">Firm Name</label><br>
+                        <input type="text" id="textbox1" class="text-box" name="textbox1" placeholder="Input">
+                    </div>
+
+                    <div class="box">
+                        <label for="textbox2">Booking Contact Name</label><br>
+                        <input type="text" id="textbox2" class="text-box" name="textbox2" placeholder="Type here">
+                    </div>
+
+                    <div class="box">
+                        <label for="textbox3">Phone Number (No Spaces)</label><br>
+                        <input type="text" id="textbox3" class="text-box" name="textbox3" placeholder="Type here">
+                    </div>
+                </div>
+
+                <div class="box-container">
+                    <div class="box">
+                        <label for="textbox4">Billing Address</label><br>
+                        <input type="text" id="textbox4" class="text-box" name="textbox4" placeholder="Type here">
+                    </div>
+
+                    <div class="box">
+                        <label for="textbox5">ZIP/Postal Code</label><br>
+                        <input type="text" id="textbox5" class="text-box" name="textbox5" placeholder="Input">
+                    </div>
+
+                    <div class="box">
+                        <label for="textbox6">Country/City</label><br>
+                        <input type="text" id="textbox6" class="text-box" name="textbox6" placeholder="Canada">
+                    </div>
+                </div>
+            </div>
+
+            <div class="space2">
+                <div class="box-container1">
+                    <div class="box">
+                        <label for="textbox7">Role</label><br>
+                        <input type="text" id="textbox7" class="text-box" name="textbox7">
+                    </div>
+
+                    <div class="box">
+                        <label for="textbox8">Name of Represented Client</label><br>
+                        <input type="text" id="textbox8" class="text-box" name="textbox8">
+                    </div>
+                </div>
+
+                <div class="box-container1">
+                    <div class="box">
+                        <label for="textbox9">Lead counsel(s) Information</label><br>
+                        <input type="text" id="textbox9" class="text-box" name="textbox9" placeholder="Name">
+                    </div>
+
+                    <div class="box">
+                        
+                        <input type="text" id="textbox10" class="text-box" name="textbox10" placeholder="Email">
+                    </div>
+                </div>
+
+                <div class="dynamicInfo" id="dynamicTextBoxContainer">
+                    <button type="button" class="plus-button" onclick="addTextboxes()">+</button>
+                </div>
+            </div>
+            </form>
+    </div>
+            </div>
+
+    <div class="OPI">
+      <p>
+          <button id="dropdownButtonOPI">
+              <span id="arrowSymbolOPI"> ▼</span>
+          </button>
+          Opposing Party Information
+      </p>
+  </div>
+  <div id="informationOPI">
+      <form action="#" method="post">
+          <div class="space1">
+              <div class="box-container">
+                  <div class="box">
+                      <label for="textboxOPI1">Firm Name</label><br>
+                      <input type="text" id="textboxOPI1" class="text-box" name="textboxOPI1" placeholder="Input">
+                  </div>
+  
+                  <div class="box">
+                      <label for="textboxOPI2">Booking Contact Name</label><br>
+                      <input type="text" id="textboxOPI2" class="text-box" name="textboxOPI2" placeholder="Type here">
+                  </div>
+  
+                  <div class="box">
+                      <label for="textboxOPI3">Phone Number (No Spaces)</label><br>
+                      <input type="text" id="textboxOPI3" class="text-box" name="textboxOPI3" placeholder="Type here">
+                  </div>
+              </div>
+  
+              <div class="box-container">
+                  <div class="box">
+                      <label for="textboxOPI4">Billing Address</label><br>
+                      <input type="text" id="textboxOPI4" class="text-box" name="textboxOPI4" placeholder="Type here">
+                  </div>
+  
+                  <div class="box">
+                      <label for="textboxOPI5">ZIP/Postal Code</label><br>
+                      <input type="text" id="textboxOPI5" class="text-box" name="textboxOPI5" placeholder="Input">
+                  </div>
+  
+                  <div class="box">
+                      <label for="textboxOPI6">Country/City</label><br>
+                      <input type="text" id="textboxOPI6" class="text-box" name="textboxOPI6" placeholder="Canada">
+                  </div>
+              </div>
+          </div>
+  
+          <div class="space2">
+              <div class="box-container1">
+                  <div class="box">
+                      <label for="textboxOPI7">Role</label><br>
+                      <input type="text" id="textboxOPI7" class="text-box" name="textboxOPI7" placeholder="Input">
+                  </div>
+  
+                  <div class="box">
+                      <label for="textboxOPI8">Name of Represented Client</label><br>
+                      <input type="text" id="textboxOPI8" class="text-box" name="textboxOPI8">
+                  </div>
+              </div>
+  
+              <div class="box-container1">
+                  <div class="box">
+                      <label for="textboxOPI9">Lead counsel(s) Information:</label><br>
+                      <input type="text" id="textboxOPI9" class="text-box" name="textboxOPI9" placeholder="Name">
+                  </div>
+  
+                  <div class="box">
+                      <label for="textboxOPI10"></label><br>
+                      <input type="text" id="textboxOPI10" class="text-box" name="textboxOPI10" placeholder="Email">
+                  </div>
+              </div>
+  
+              <div class="dynamicInfo" id="dynamicTextBoxContainerOPI">
+                  <button type="button" class="plus-button" onclick="addTextboxesOPI()">+</button>
+              </div>
+          </div>
+      </form>
+  </div>
+<div class="AP">
+    <div class="apSub">
+    <p>
+      <button id="dropdownButtonAP">
+        <span id="arrowSymbolAP"> ▼</span>
+      </button>
+      ADDITIONAL PARTIES
+    </p>
+  
+  
+  <div id="informationAP">
+    <form action="#" method="post">
+      <div class="space1">
+        <div class="box-container">
+          <div class="box">
+            <label for="textboxAP1">Firm Name</label><br>
+            <input type="text" id="textboxAP1" class="text-box" name="textboxAP1" placeholder="Input">
+          </div>
+          <div class="box">
+            <label for="textboxAP2">Booking Contact Name</label><br>
+            <input type="text" id="textboxAP2" class="text-box" name="textboxAP2" placeholder="Type here">
+          </div>
+          <div class="box">
+            <label for="textboxAP3">Billing Address</label><br>
+            <input type="text" id="textboxAP3" class="text-box" name="textboxAP3" placeholder="Type here">
+          </div>
+        </div>
+        <div class="box-container">
+          <div class="box">
+            <label for="textboxAP4">Country/City</label><br>
+            <input type="text" id="textboxAP4" class="text-box" name="textboxAP4" placeholder="Canada">
+          </div>
+          <div class="box">
+            <label for="textboxAP5">Role</label><br>
+            <input type="text" id="textboxAP5" class="text-box" name="textboxAP5" placeholder="Input">
+          </div>
+          <div class="box">
+            <label for="textboxAP6">Name of Represented Client</label><br>
+            <input type="text" id="textboxAP6" class="text-box" name="textboxAP6">
+          </div>
+        </div>
+      </div>
+      <div class="space2">
+        <div class="box-container">
+          <div class="box">
+            <label for="textboxAP7">Lead counsel(s) Information</label><br>
+            <input type="text" id="textboxAP7" class="text-box" name="textboxAP7" placeholder="Name">
+          </div>
+          <div class="box">
+            <label for="textboxAP8"></label><br>
+            <input type="text" id="textboxAP8" class="text-box" name="textboxAP8" placeholder="Email">
+          </div>
+        </div>
+        <div class="box-container">
+          <div class="box">
+            <label for="textboxAP9"></label><br>
+            <input type="text" id="textboxAP9" class="text-box" name="textboxAP9" placeholder="Add additional counsel">
+          </div>
+          <div class="box">
+            <label for="textboxAP10"></label><br>
+            <input type="text" id="textboxAP10" class="text-box" name="textboxAP10">
+          </div>
+        </div>
+        <div class="dynamicInfo" id="dynamicTextBoxContainerAP">
+          <button type="button" class="plus-button" onclick="addTextboxesAP()">+</button>
+        </div>
+        
+      </div>
+    </form>
+</div>
+</div>
+
+<div class="apSubClass"></div>
+</div>
+<button onclick="loadAP()" id="loadAPButton">Load AP</button>
+
+</div>
+<script>
+    // BPI (Booking Party Information)
+
+  var dropdownButton = document.getElementById('dropdownButton');
+  var informationDiv = document.getElementById('slide');
+  var arrowSymbol = document.getElementById('arrowSymbol');
+
+  dropdownButton.addEventListener('click', function (event) {
+      event.preventDefault(); // Prevent the default form submission behavior
+
+      if (informationDiv.style.display === 'none' || informationDiv.style.display === '') {
+          informationDiv.style.display = 'block';
+          dropdownButton.classList.add('open');
+          arrowSymbol.innerHTML = ' ▲';
+      } else {
+          informationDiv.style.display = 'none';
+          dropdownButton.classList.remove('open');
+          arrowSymbol.innerHTML = ' ▼';
+      }
+  });
+  document.getElementById('useInformationCheckbox').addEventListener('change', function () {
+    const slideDiv = document.getElementById('information');
+
+    if (this.checked) {
+      // If checkbox is checked, show information
+      slideDiv.style.display = 'block';
+    } else {
+      // If checkbox is unchecked, hide information
+      slideDiv.style.display = 'none';
+    }
+  });
+
+  
+
+  function addTextboxes() {
+      const container = document.getElementById('dynamicTextBoxContainer');
+      const newBoxContainer = createBoxContainer();
+      container.appendChild(newBoxContainer);
+  }
+
+  function createBoxContainer() {
+      const boxContainer = document.createElement('div');
+      boxContainer.className = 'box-container';
+
+      const newBox1 = createBox('textbox' + (boxContainer.children.length * 2 + 1));
+      const newBox2 = createBox('textbox' + (boxContainer.children.length * 2 + 2));
+
+      boxContainer.appendChild(newBox1);
+      boxContainer.appendChild(newBox2);
+
+      return boxContainer;
+  }
+
+  function createBox(id) {
+      const box = document.createElement('div');
+      box.className = 'box';
+
+      const label = document.createElement('label');
+      label.setAttribute('for', id);
+      
+
+      const input = document.createElement('input');
+      input.type = 'text';
+      input.id = id;
+      input.name = id;
+      input.className = 'text-box';
+
+      box.appendChild(label);
+      box.appendChild(document.createElement('br'));
+      box.appendChild(input);
+
+      return box;
+  }
+
+  // OPI (Opposing Party Information)
+  var dropdownButtonOPI = document.getElementById('dropdownButtonOPI');
+  var informationDivOPI = document.getElementById('informationOPI');
+  var arrowSymbolOPI = document.getElementById('arrowSymbolOPI');
+
+  dropdownButtonOPI.addEventListener('click', function (event) {
+      if (informationDivOPI.style.display === 'none' || informationDivOPI.style.display === '') {
+          informationDivOPI.style.display = 'block';
+          dropdownButtonOPI.classList.add('open');
+          arrowSymbolOPI.innerHTML = ' ▲';
+      } else {
+          informationDivOPI.style.display = 'none';
+          dropdownButtonOPI.classList.remove('open');
+          arrowSymbolOPI.innerHTML = ' ▼';
+      }
+  });
+
+  function addTextboxesOPI() {
+      const container = document.getElementById('dynamicTextBoxContainerOPI');
+      const newBoxContainer = createBoxContainerOPI();
+      container.appendChild(newBoxContainer);
+  }
+
+  function createBoxContainerOPI() {
+      const boxContainer = document.createElement('div');
+      boxContainer.className = 'box-container';
+
+      const newBox1 = createBoxOPI('textboxOPI' + (boxContainer.children.length * 2 + 1));
+      const newBox2 = createBoxOPI('textboxOPI' + (boxContainer.children.length * 2 + 2));
+
+      boxContainer.appendChild(newBox1);
+      boxContainer.appendChild(newBox2);
+
+      return boxContainer;
+  }
+
+  function createBoxOPI(id) {
+      const box = document.createElement('div');
+      box.className = 'box';
+
+      const label = document.createElement('label');
+      label.setAttribute('for', id);
+     
+
+      const input = document.createElement('input');
+      input.type = 'text';
+      input.id = id;
+      input.name = id;
+      input.className = 'text-box';
+
+      box.appendChild(label);
+      box.appendChild(document.createElement('br'));
+      box.appendChild(input);
+
+      return box;
+  }
+  //APPPPPPPPP
+  
+var dropdownButtonAP = document.getElementById('dropdownButtonAP');
+  var informationDivAP = document.getElementById('informationAP');
+  var arrowSymbolAP = document.getElementById('arrowSymbolAP');
+
+  dropdownButtonAP.addEventListener('click', function (event) {
+    event.preventDefault();
+    if (informationDivAP.style.display === 'none' || informationDivAP.style.display === '') {
+      informationDivAP.style.display = 'block';
+      dropdownButtonAP.classList.add('open');
+      arrowSymbolAP.innerHTML = ' ▲';
+    } else {
+      informationDivAP.style.display = 'none';
+      dropdownButtonAP.classList.remove('open');
+      arrowSymbolAP.innerHTML = ' ▼';
+    }
+  });
+
+  function addTextboxesAP() {
+    const container = document.getElementById('dynamicTextBoxContainerAP');
+    const newBoxContainer = createBoxContainerAP();
+    container.appendChild(newBoxContainer);
+  }
+
+  function createBoxContainerAP() {
+    const boxContainer = document.createElement('div');
+    boxContainer.className = 'box-container';
+
+    const newBox1 = createBoxAP('textboxAP' + (boxContainer.children.length * 2 + 1));
+    const newBox2 = createBoxAP('textboxAP' + (boxContainer.children.length * 2 + 2));
+
+    boxContainer.appendChild(newBox1);
+    boxContainer.appendChild(newBox2);
+
+    return boxContainer;
+  }
+
+  function createBoxAP(id) {
+    const box = document.createElement('div');
+    box.className = 'box';
+
+    const label = document.createElement('label');
+    label.setAttribute('for', id);
+    
+
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.id = id;
+    input.name = id;
+    input.className = 'text-box';
+
+    box.appendChild(label);
+    box.appendChild(document.createElement('br'));
+    box.appendChild(input);
+
+    return box;
+  }
+  
+  function loadAP() {
+    // Clone the content of informationAP and append it to the AP class
+    var apSubContent = document.querySelector('#informationAP').cloneNode(true);
+    var apClass = document.querySelector('.AP');
+    apClass.appendChild(apSubContent);
+  }
+  
+
+</script>
+</body>
+</html>
